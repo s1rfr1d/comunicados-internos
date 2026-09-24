@@ -3,7 +3,7 @@
 Plugin Name: Comunicados Internos - Dashboard & Acuse de Recibo
 Description: Registra qué encargados han leído los comunicados, ofrece un panel de estadísticas y restringe acceso.
 Version: 2.1
-Author: Denis Soria
+Author: Denis Willy Soria Zambrana
 */
 
 // ==========================================
