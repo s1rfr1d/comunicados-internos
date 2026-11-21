@@ -368,4 +368,38 @@ function ci_restringir_acceso_tiendas() {
     }
 }
 add_action( 'template_redirect', 'ci_restringir_acceso_tiendas' );
+// ==========================================
+// 7. SHORTCODE: BOTÓN DE INGRESO / NOMBRE DE USUARIO
+// ==========================================
+function ci_shortcode_boton_ingreso( $atts ) {
+    // Puedes cambiar '/wp-login.php' si usas una página personalizada de login
+    $atts = shortcode_atts( array(
+        'url_login' => wp_login_url( home_url( '/comunicados/' ) ),
+    ), $atts );
+
+    if ( is_user_logged_in() ) {
+        $current_user = wp_get_current_user();
+        $logout_url = wp_logout_url( home_url( '/comunicados/' ) );
+
+        return '
+        <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 14px 18px; background: #fff; border: 2px solid #f26522; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.08); box-sizing: border-box;">
+            <span style="color: #333; font-weight: 700; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                <span style="color: #f26522;">●</span> ' . esc_html( $current_user->display_name ) . '
+            </span>
+            <a href="' . esc_url( $logout_url ) . '" style="color: #888; font-size: 12px; text-decoration: none; font-weight: 600;">
+                Salir
+            </a>
+        </div>';
+    } else {
+        return '
+        <a href="' . esc_url( $atts['url_login'] ) . '" style="display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; padding: 14px 20px; background: #ffffff; color: #f26522; border: 2px solid #f26522; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.12); font-weight: 700; font-size: 16px; text-decoration: none; box-sizing: border-box; transition: all 0.2s ease;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="#f26522" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L14.4 4.2L17.6 3.8L18.8 6.8L21.8 8L21.4 11.2L23.6 13.6L21.4 16L21.8 19.2L18.8 20.4L17.6 23.4L14.4 23L12 25.2L9.6 23L6.4 23.4L5.2 20.4L2.2 19.2L2.6 16L0.4 13.6L2.6 11.2L2.2 8L5.2 6.8L6.4 3.8L9.6 4.2L12 2Z" transform="scale(0.9) translate(1, -1)"/>
+                <path d="M9.5 16.2L6.3 13L7.7 11.6L9.5 13.4L15.3 7.6L16.7 9L9.5 16.2Z" fill="#ffffff"/>
+            </svg>
+            Ingresar
+        </a>';
+    }
+}
+add_shortcode( 'ci_boton_ingreso', 'ci_shortcode_boton_ingreso' );
 ?>
