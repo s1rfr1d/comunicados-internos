@@ -8,12 +8,13 @@ Este plugin para WordPress está desarrollado para gestionar, auditar y registra
 * **Confirmación Asíncrona (AJAX):** Botón de "He leído y comprendido" que registra la fecha y hora exacta de lectura sin necesidad de recargar la página.
 * **Control de Evaluados:** Permite al administrador seleccionar específicamente qué usuarios están obligados a confirmar la lectura. Los usuarios no seleccionados no verán los elementos de seguimiento.
 * **Auditoría Pública por Publicación:** Genera una tabla al final de cada comunicado detallando el estado de lectura (Leído / No leído) de cada usuario evaluado.
-* **Restricción de Acceso:** Crea automáticamente un rol de usuario denominado "Encargado de Tienda" (tiendas). El plugin restringe la navegación de estos usuarios, forzando la redirección hacia la sección de comunicados si intentan acceder a otras áreas del sitio.
+* **Restricción de Acceso:** Crea automáticamente un rol de usuario denominado "Encargado de Tienda" (`tiendas`). El plugin restringe la navegación de estos usuarios, forzando la redirección hacia la sección de comunicados si intentan acceder a otras áreas del sitio.
+* **Botón de Acceso Dinámico (Shortcode):** Incluye el shortcode `[ci_boton_ingreso]` que muestra un botón de inicio de sesión para usuarios no autenticados y, una vez iniciada la sesión, lo reemplaza automáticamente por el nombre del usuario conectado y un enlace de cierre de sesión.
 
 ## Requisitos del Sistema
 * WordPress 5.0 o superior.
 * PHP 7.4 o superior.
-* Tema compatible con la ejecución de filtros estándar de contenido (the_content).
+* Tema compatible con la ejecución de filtros estándar de contenido (`the_content`).
 
 ## Instrucciones de Instalación
 
@@ -32,6 +33,13 @@ Para que el sistema comience a registrar los acuses de recibo de forma correcta,
 2. En la pantalla del panel de control, localice la sección titulada **Encargados a Evaluar**.
 3. Marque las casillas correspondientes a los usuarios (encargados de tienda) que deberán confirmar obligatoriamente la lectura de las publicaciones.
 4. Haga clic en el botón **Guardar Selección**. A partir de este momento, el botón de lectura y la tabla de seguimiento aparecerán en los comunicados exclusivamente para estos usuarios.
+
+## Uso del Shortcode de Acceso
+
+Para integrar el botón dinámico de inicio de sesión y visualización de usuario en cualquier página o plantilla del sitio, inserte el siguiente shortcode mediante un bloque de texto o de shortcode en su constructor visual:
+
+```text
+[ci_boton_ingreso]
 
 ## Nota sobre Notificaciones Push
 Para alertar a los usuarios sobre la publicación de nuevos comunicados mediante ventanas emergentes en el navegador web, incluso cuando la pestaña de WordPress se encuentra cerrada, se recomienda integrar este plugin de forma complementaria con el servicio gratuito **OneSignal Web Push Notifications**.
